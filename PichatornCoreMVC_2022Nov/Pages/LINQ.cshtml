@@ -1,0 +1,202 @@
+﻿@page
+@using PichatornCoreMVC_2022Nov.Models
+{
+@{
+    Layout = "_Layout";
+
+    List<User> user = new List<User>()
+    {
+        new User {Id=1, Name="Wisit", Age=29, Type="user", ProvinceId=1},
+        new User {Id=2, Name="Somchai", Age=45, Type="admin", ProvinceId=2},
+        new User {Id=3, Name="Jame", Age=18, Type="user", ProvinceId=3},
+        new User {Id=4, Name="Byan", Age=30, Type="user", ProvinceId=1}
+    };
+
+    List<Province> provinces = new List<Province>()
+    {
+        new Province{ProvinceId=1, ProvinceName="Bankgok"},
+        new Province{ProvinceId=2, ProvinceName="Phuket"},
+        new Province{ProvinceId=3, ProvinceName="Chonburi"},
+    };
+}
+
+<h1>LINQ</h1>
+<div class="row">
+    <div class="col-lg-6">
+        <h4>Select All</h4>
+        @{
+            var data = user.ToList();
+        }
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr class="text-center text-bg-primary">
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Age</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in data)
+                {
+                    <tr>
+                        <td class="text-center">@item.Id</td>
+                        <td>@item.Name</td>
+                        <td class="text-center">@item.Age</td>
+                        <td>@item.Type</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>Select Any Fields</h4>
+        @{
+            var data2 = user.Select(user => new { user.Id, user.Name });
+            <ul>
+                @foreach(var item in data2)
+                {
+                    <li>@item.Id, @item.Name</li>
+                }
+            </ul>
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>Select Any Rows</h4>
+        @{
+            int id = 1;
+            var data3 = user
+                        .Where(user => user.Id > id && user.Type == "user")
+                        .ToList();
+            <ul>
+                @foreach (var item in data3)
+                {
+                    <li>@item.Id, @item.Name, @item.Age, @item.Type</li>
+                }
+            </ul>
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        @*ค่าที่คืนมาจะคืนมาค่าเดียวเท่านั้น SingleOrDefault*@
+        <h4>SingleOrDefault</h4>
+        @{
+            var data4 = user
+                        .SingleOrDefault(user => user.Id == id);
+            <ul>
+                <li>@data4.Id, @data4.Name, @data4.Age, @data4.Type</li>
+            </ul>
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        @*คืนรายการแรกเมื่อมีหลายรายการ*@
+        <h4>FirstOrDefault</h4>
+        @{
+            var data5 = user
+                        .FirstOrDefault(user => user.Id > id);
+            <ul>
+                <li>@data5.Id, @data5.Name, @data5.Age, @data5.Type</li>
+            </ul>
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>OrderBy</h4>
+        @{
+            var data6 = user.OrderBy(user => user.Age).ThenByDescending(user=>user.Name).ToList();
+            <ul>
+                @foreach (var item in data6)
+                {
+                    <li>@item.Id, @item.Name, @item.Age, @item.Type</li>
+                }
+            </ul>
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>OrderBy + Where</h4>
+        @{
+            var dataTest = user.Where(user => user.Id >1).OrderBy(user => user.Age);
+            <ul>
+                @foreach (var item in dataTest)
+                {
+                    <li>@item.Id, @item.Name, @item.Age, @item.Type</li>
+                }
+            </ul>
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>Count</h4>
+        @{
+            var total = user.Count();
+            var totalUser = user.Count(user => user.Type == "user");
+
+        }
+        <div>Total: @total</div>
+        <div>TotalUser: @totalUser</div>
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>Max, Min, Average</h4>
+        @{
+            var minAge = user.Min(user => user.Age);
+            var maxAge = user.Max(user => user.Age);
+            var avg = user.Average(user => user.Age);
+        }
+        <div>Min: @minAge</div>
+        <div>Min: @maxAge</div>
+        <div>Average: @avg</div>
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>Skip, Take</h4>
+        @{
+            var data7 = user.OrderBy(user => user.Id).Skip(0).Take(3).ToList();
+
+            <ul>
+                @foreach(var item in data7)
+                {
+                <li>@item.Id, @item.Name, @item.Age, @item.Type</li>
+                }
+            </ul>
+
+        }
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>GroupBy</h4>
+        @{
+            var data8 = user.GroupBy(user => user.Type).Select(group => new { group.Key, Total = group.Count() });
+        }
+        <ul>
+            @foreach(var item in data8)
+            {
+                <li>@item.Key, @item.Total</li>
+            }
+        </ul>
+        <hr />
+        @*-----------------------------------------------------------------------------------------------------*@
+
+        <h4>Join</h4>
+        @{
+            var data9 = user.Join(provinces, user => user.ProvinceId, provinces => provinces.ProvinceId, (user,provinces)=> new{user.Id, user.Name, provinces.ProvinceName});
+
+        }
+        <ul>
+            @foreach(var item in data9)
+            {
+                <li>@item.Id, @item.Name, @item.ProvinceName</li>
+            }
+        </ul>
+
+
+    </div>
+    <div class="col-lg-6">
+
+    </div>
+</div>

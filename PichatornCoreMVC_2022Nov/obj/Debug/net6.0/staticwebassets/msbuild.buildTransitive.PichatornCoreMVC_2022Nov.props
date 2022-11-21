@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\PichatornCoreMVC_2022Nov.props" />
+</Project>

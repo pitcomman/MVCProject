@@ -1,0 +1,20 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<h1>@ViewBag.Name</h1>
+<div>
+    <b>ID: </b>@Model.Id
+</div>
+<div>
+    <b>Name: </b>@Model.Name
+</div>
+<div>
+    <b>Price: </b>@Model.Price.ToString("#,##0.00")
+</div>
+<div>
+    <b>Description: </b>@Model.Description
+</div>
+

@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "PichatornCoreMVC_2022Nov/1.0.0": {
+        "runtime": {
+          "PichatornCoreMVC_2022Nov.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "PichatornCoreMVC_2022Nov/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

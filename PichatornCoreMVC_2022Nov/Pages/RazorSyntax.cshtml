@@ -1,0 +1,154 @@
+﻿@page
+@using System.Collections
+@{
+    Layout = "_Layout";
+    var name = "Pichatorn";
+    var age = 27;
+    var score = 50.0;
+    
+}
+        <h1>Razor Syntax</h1>
+        <div class="row">
+            <div class="col-lg-6">
+                @*This is comment (not show in view code)*@
+                <!-- This is comment (show in view code)-->
+               <b>Name: </b>@name<br/>
+               <b>Age: </b>@age<br/>
+               <hr/>
+                
+
+
+               <h4>If-else</h4>
+               @if(score<50)
+               {
+                   <div>สอบผ่าน</div>
+               }
+               else
+               {
+                   <div>สอบไม่ผ่าน</div>
+               }
+               <hr/>
+               @*-----------------------------------------------------------------------------------------------------*@
+
+               <h4>Switch</h4>
+                @{
+                    var currentDate = DateTime.Now.DayOfWeek;
+
+                    switch(currentDate)
+                    {
+                        case DayOfWeek.Saturday:
+                        case DayOfWeek.Sunday:
+                            <div>Today is weekend (@currentDate)</div>                           
+                            break;
+                        default:
+                            <div>Today is weekday (@currentDate)</div>
+                            break;
+
+                    }
+                }
+                <hr/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+
+                <h4>For loop</h4>
+                @for(int i=0;i<7;i++)
+                {
+                    <font size="@i">Font size</font><br/>
+                }
+                <hr/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+
+
+                <h4>While loop</h4>
+                @{
+                    int size = 36;
+                    while(size>7)
+                    {
+                        <div style="font-size:@(size)pt">Font size</div>
+                        size -= 2;
+                    }
+                }
+                <hr/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+
+            </div>
+            <div class="col-lg-6">
+
+                <h4>Array</h4>
+                @{
+                    string[] country = { "Thailand", "Japan", "Korea", "England" };
+                    foreach (string item in country)
+                    {
+                        <div>@item</div>
+                    }
+                }
+                <hr/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+
+                <h4>Array List</h4>
+                @{
+                    ArrayList arrayList = new ArrayList();
+                    arrayList.Add("Pichatorn");
+                    arrayList.Add(27);
+                    arrayList.Add(1234.5678);
+                    arrayList.Add(DateTime.Now);
+
+
+                    foreach(var item in arrayList)
+                    {
+                        <div>@item</div>
+                    }
+                }
+                <hr/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+                <h4>Generic List</h4>
+                @{
+                    List<string> myList = new List<string>()
+                    {
+                        "A", "B"
+                    };
+
+                    myList.Add("C");
+                    myList.Insert(1, "D");
+                    myList.RemoveAt(0);
+
+                    foreach(string item in myList)
+                    {
+                        <div>@item</div>
+                    }
+                }
+                <hr/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+                <h4>Dictionary</h4>
+                @{
+                    Dictionary<string, double> result = new Dictionary<string, double>();
+                    result.Add("A", 60);
+                    result.Add("B", 48.2);
+                    result.Add("C", 73.1);
+
+                    foreach(KeyValuePair<string,double> item in result)
+                    {
+                        if(item.Value < 50)
+                        {
+                            <div class="text-danger">@item.Key: ไม่ผ่าน</div>
+                        }
+                        else
+                        {
+                            <div class="text-success">@item.Key: ผ่าน</div>
+                        }
+                    }
+                }
+                <ht/>
+                @*-----------------------------------------------------------------------------------------------------*@
+
+
+  
+
+            </div>
+ 
+        </div>

@@ -1,0 +1,20 @@
+﻿@model Product
+
+@{
+    ViewData["Title"] = "ShowData";
+}
+
+<h1>Show Data</h1>
+<div>
+    <b>Name: </b>@Model.Name
+</div>
+
+<div>
+    <b>Name: </b>@Model.Price.ToString("#,##0.00")
+</div>
+
+<div>
+    <b>Name: </b>@Model.Description
+</div>
+
+

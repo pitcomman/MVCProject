@@ -1,0 +1,104 @@
+﻿@*@model IEnumerable<MVCCoreEF.Models.Product>*@
+@model IPagedList<MVCCoreEF.Models.Product>
+@using X.PagedList
+@using X.PagedList.Mvc.Core
+
+
+@{
+    ViewData["Title"] = "Product";
+}
+
+<h1>Product</h1>
+
+<div class="row my-2">
+    <div class="col-lg-4">
+        <form asp-action="index" method="get">
+            <select name="categoryId" id="categoryId" class="form-control mb-2" asp-items="ViewBag.Category">
+                <option value="Select Category">Select Category</option>
+            </select>
+            <input type="submit" value="submit" class="btn btn-primary" />
+        </form>
+    </div>
+</div>
+<hr />
+<table class="table table-bordered table-striped table-hover">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ProductId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ProductName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Supplier.CompanyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Category.CategoryName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().QuantityPerUnit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UnitPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UnitsInStock)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().UnitsOnOrder)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ReorderLevel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Discontinued)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Supplier.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityPerUnit)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsInStock)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitsOnOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReorderLevel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Discontinued)
+            </td>
+        </tr>
+}
+    </tbody>
+
+</table>
+
+@Html.PagedListPager(Model, page=>Url.Action("Index", new{page, categoryId=ViewBag.CategoryId}),
+new X.PagedList.Web.Common.PagedListRenderOptions{
+    PageClasses = new string[]{"page-link"},
+    UlElementClasses = new string[]{"pagination"},
+    LiElementClasses = new string[]{"page-item"}
+})
+

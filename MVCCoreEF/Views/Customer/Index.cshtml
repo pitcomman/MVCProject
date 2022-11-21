@@ -1,0 +1,146 @@
+﻿@model IEnumerable<MVCCoreEF.Models.Customer>
+
+@{
+    ViewData["Title"] = "Customer";
+}
+
+@section Styles{
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.11.3/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.1/css/buttons.dataTables.min.css" />
+}
+
+<h1>Customer</h1>
+
+<div class="row my-2">
+    <div class="col-lg-6">
+        <form asp-action="search" method="get" >
+            <div class="mb-3">
+                <label class="form-label">Search By</label><br />
+                <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="searchBy" id="ContactName" value="ContactName" />
+                    <label class="form-check-label" for="ContactName">Contact Name</label>
+                </div>
+
+
+                <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="searchBy" id="City" value="City" />
+                    <label class="form-check-label" for="City">City</label>
+                </div>
+
+                <div class="form-check-inline">
+                    <input class="form-check-input" type="radio" name="searchBy" id="ShowAll" value="ShowAll" />
+                    <label class="form-check-label" for="ShowAll">Show All</label>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="keyword">Keyword</label>
+                <input class="form-control" type="text" name="keyword" id="keyword" />
+            </div>
+            <input class="btn btn-primary" type="submit" value="search" />
+
+
+        </form>
+    </div>
+
+    <div class="col-lg-6">
+
+    </div>
+
+</div>
+
+<table class="table table-bordered table-striped table-hover" id="customer">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CustomerId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CompanyName)
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortBy="@ViewBag.SortBy">
+                    @Html.DisplayNameFor(model => model.ContactName)
+                </a>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Region)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Phone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fax)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CustomerId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Region)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fax)
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section Scripts
+{
+    <script type="text/javascript" src=" https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script> 
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script> 
+    <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+
+    <script>
+        $(function(){
+            $("#customer").DataTable({
+                dom:'Bfrtip',
+                buttons:['copy', 'excel', 'pdf', 'zip']
+            });
+        })
+    </script>
+}

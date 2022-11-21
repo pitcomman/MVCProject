@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Product>
+
+@{
+    //ViewData["Title"] = "Product";
+}
+
+<h1>@ViewBag.Title</h1>
+@*<h2>@ViewBag.Test</h2>*@
+
+@*<a asp-action="Details" asp-route-id="1" asp-route-name="iPhone 14 Pro Max" asp-route-price="45000" class="btn btn-success">iPhone 14 Pro Max</a>
+
+<a asp-action="Details" asp-route-id="2" asp-route-name="iPad Mini" asp-route-price="30000" class="btn btn-primary">iPad Mini</a>
+
+<a asp-action="Details" asp-route-id="3" asp-route-name="Macbook Pro" asp-route-price="60000" class="btn btn-danger">Macbook Pro</a>*@
+
+<div class="row">
+    <div class="col-lg-6">
+
+        <a class="btn btn-primary" asp-action="Create">
+            Create
+        </a>
+
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr class="text-center">
+                    <th>
+                        <a asp-action="Index" asp-route-sortBy="id">ID</a>
+                    </th>
+                    <th>
+                        <a asp-action="Index" asp-route-sortBy="name">Name</a>
+                    </th>
+                    <th>
+                        <a asp-action="Index" asp-route-sortBy="price">Price</a>
+                    </th>
+                    <th>Category</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td class="text-center">@item.Id</td>
+                        <td>@item.Name</td>
+                        <td class="text-end">@item.Price.ToString("#,##0.00")</td>
+                        <td>@item.Category.CategoryName</td>
+                        <td class="text-center">
+                            <a class="btn btn-primary btn-sm" asp-action="Details" asp-route-id="@item.Id">Detail</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <ul class="pagination mt-3">
+            @for(int i=1; i<=ViewBag.TotalPage; i++)
+            {
+                <li class="page-item @(ViewBag.Page==i?"active":"")">
+                    <a asp-action="Index" asp-route-page="@i" asp-route-sortBy="@ViewBag.SortBy" class="page-link">
+                        @i
+                    </a>
+                </li>
+
+            }
+        </ul>
+    </div>
+    <div class="col-lg-6">
+
+    </div>
+
+</div>
+
+

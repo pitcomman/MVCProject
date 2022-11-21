@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\PichatornCoreMVC_2022Nov.props" />
+</Project>

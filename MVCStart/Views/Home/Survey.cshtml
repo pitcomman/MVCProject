@@ -1,0 +1,103 @@
+﻿
+@{
+    ViewData["Title"] = "Survey";
+    List<string> hobbies = (List<string>)ViewBag.Hobby;
+}
+
+<h1>Survey</h1>
+<div class="row">
+    <div class="col-lg-6">
+        <form asp-action="Survey">
+
+            @*Text*@
+            <div class="mb-3">
+                <label class="form-label" for="name">Name</label>
+                <input class="form-control" type="text" name="name" id="name" />
+            </div>
+
+            @*Password*@
+            <div class="mb-3">
+                <label class="form-label" for="password">Password</label>
+                <input class="form-control" type="password" name="password" id="password" />
+            </div>
+
+            @*RadioButton*@
+            <div class="md-3">
+                <label>Gender</label><br />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="male" value="Male" checked />
+                    <label class="form-check-label" for="male">Male</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="gender" id="female" value="Female" />
+                    <label class="form-check-label" for="female">Female</label>
+                </div>
+            </div>
+            <br />
+
+            @*CheckBox*@
+            <div class="md-3">
+                <label>Hobby</label><br />
+
+               
+
+                @for(int i=0; i<hobbies.Count; i++)
+                {
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" name="hobby@(i)" id="hobby@(i)" value="@hobbies[i]" checked />
+                        <label class="form-check-label" for="hobby@(i)">@hobbies[i]</label>
+                    </div>
+                }
+
+                @*<div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="hobby1" id="hobby1" value="Shoping" checked />
+                    <label class="form-check-label" for="hobby1">Shoping</label>
+                </div>
+
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="hobby2" id="hobby2" value="Swimming" />
+                    <label class="form-check-label" for="hobby2">Swimming</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" name="hobby3" id="hobby3" value="Hiking" />
+                    <label class="form-check-label" for="hobby3">Hiking</label>
+                </div>*@
+            </div>
+            <br />
+
+            @*Text Area*@
+            <div class="mb-3">
+                <label class="form-label" for="address">Address</label>
+                <textarea class="form-control" name="address" id="address" rows="5"></textarea>
+            </div>
+
+            <div class="md-3">
+                <label class="form-label" for="province">Province</label>
+                <select class="form-control" name="province" id="privince" asp-items="ViewBag.Province">
+                    <option value="">Select Province</option>
+                    @*<option>Bangkok</option>
+                    <option>Phuket</option>
+                    <option>Rayong</option>*@
+
+
+                </select>
+            </div>
+            <br />
+
+
+            @*Submit*@
+            <input class="btn btn-success" type="submit" value="Submit" />
+            <input type="hidden" name="code" value="123456" />
+
+
+        </form>
+    </div>
+
+    <div class="col-lg-6">
+
+        @Html.Raw(@ViewBag.Data)
+    </div>
+</div>
+
+
+

@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewData["Title"] = "Add Image";
+}
+
+<h1>Add Image</h1>
+
+@Html.Raw(ViewBag.Message)
+<form asp-action="Create" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label" for="file">Select File</label>
+        <input class="form-control" type="file" name="file" id="file"/>
+
+        <button class="btn btn-success" type="submit">
+            <i class="fa-solid fa-upload"></i> Upload
+        </button>
+
+    </div>    
+</form>

@@ -1,0 +1,12 @@
+﻿
+@{
+    ViewData["Title"] = "Gallery";
+}
+
+<h1>Gallery</h1>
+
+<a asp-action="Create" class="btn btn-primary">Add Image</a>
+
+<div class="row mt-3">
+    @Html.Raw(ViewBag.Gallery)
+</div>
